@@ -4,12 +4,38 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Spinner;
+import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import butterknife.Bind;
+
+public class WeatherReportActivity extends AppCompatActivity {
+
+    @Bind(R.id.cityValueTv)
+    TextView cityValueTv;
+
+    @Bind(R.id.updateTimeValueTv)
+    TextView updateTimeValueTv;
+
+    @Bind(R.id.wheatherValueTv)
+    TextView wheatherValueTv;
+
+    @Bind(R.id.tempratureValueTv)
+    TextView tempratureValueTv;
+
+    @Bind(R.id.windValueTv)
+    TextView windValueTv;
+
+
+    @Bind(R.id.citySpinner)
+    Spinner citySpinner;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

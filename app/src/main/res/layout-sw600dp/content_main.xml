@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".MainActivity"
+    tools:context=".WeatherReportActivity"
     tools:showIn="@layout/activity_main">
 
 
     <Spinner
+        android:id="@+id/citySpinner"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="150dp"
