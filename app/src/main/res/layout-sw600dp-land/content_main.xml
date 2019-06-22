@@ -9,18 +9,19 @@
     tools:showIn="@layout/activity_main">
 
 
-
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginTop="50dp"
-        android:paddingLeft="20dp"
+        android:layout_marginLeft="150dp"
+        android:layout_marginRight="150dp"
+        android:layout_marginBottom="100dp"
+        android:layout_marginTop="80dp"
+        android:paddingLeft="50dp"
         android:entries="@array/city_list">
 
 
     </Spinner>
+
 
 
     <TableLayout
@@ -29,7 +30,10 @@
         android:stretchColumns="*"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
+        android:layout_marginBottom="100dp"
+        android:layout_marginTop="200dp"
         android:layout_gravity="center_horizontal|center|center_vertical"
         >
 
