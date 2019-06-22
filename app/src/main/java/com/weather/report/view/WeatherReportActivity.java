@@ -1,4 +1,4 @@
-package com.weather.report;
+package com.weather.report.view;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.weather.report.Presenter.WeatherReportViewModel;
 import com.weather.report.Presenter.WeatherReportViewModelProvider;
+import com.weather.report.R;
 import com.weather.report.helper.BaseFlyContext;
 import com.weather.report.helper.CityDropDownAdapter;
 import com.weather.report.helper.LCEStatus;
@@ -100,7 +101,6 @@ public class WeatherReportActivity extends AppCompatActivity implements AdapterV
         viewModel.getMobileDataUsageData()
                 .observe(this, this::updateDataset);
 
-
         viewModel.getLceStatus()
                 .observe(this, this::showLceStatus);
 
@@ -136,14 +136,10 @@ public class WeatherReportActivity extends AppCompatActivity implements AdapterV
 
     private void showLceStatus(LCEStatus status) {
         if (status.getStatus() == LCEStatus.Status.SUCCESS) {
-            //mSwipeRefreshLayout.setRefreshing(false);
             showToast("New Data Available.");
         } else if (status.getStatus() == LCEStatus.Status.ERROR) {
-            //mSwipeRefreshLayout.setRefreshing(false);
-            //showErrorAlertDialog(status.getTitle(), status.getMsg());
-            showToast("Error! Please try Again Later.");
+             showToast("Error! Please try Again Later.");
         } else if (status.getStatus() == LCEStatus.Status.LOADING) {
-            // mSwipeRefreshLayout.setRefreshing(false);
             showToast("Loading Data...");
         }
     }

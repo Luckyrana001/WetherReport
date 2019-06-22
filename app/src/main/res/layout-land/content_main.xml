@@ -5,18 +5,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".WeatherReportActivity"
+    tools:context=".view.WeatherReportActivity"
     tools:showIn="@layout/activity_main">
 
 
-
+    <TextView
+        android:text="@string/select_city_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/text_large"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:gravity="center_vertical|center|center_horizontal"
+        />
     <Spinner
         android:id="@+id/citySpinner"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="70dp"
         android:layout_marginRight="70dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:paddingLeft="20dp"
        >
 
@@ -30,7 +39,9 @@
         android:stretchColumns="*"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="50dp"
+        android:layout_marginTop="90dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginRight="70dp"
         android:layout_gravity="center_horizontal|center|center_vertical"
         >
 

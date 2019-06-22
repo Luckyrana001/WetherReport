@@ -4,8 +4,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.weather.report.Constants;
-import com.weather.report.WeatherRestService;
+import com.weather.report.helper.Constants;
 import com.weather.report.helper.BaseFlyContext;
 import com.weather.report.helper.IResponseReceivedNotifyInterface;
 import com.weather.report.helper.RequestType;
@@ -90,7 +89,7 @@ public class RequestHandler {
     public void getMobileUsageDataRequest(final IResponseReceivedNotifyInterface iResponseReceivedNotifyInterface, String url) {
 
 
-        Call<WeatherApiDataResponseModel> call = service.getMobileDataUsage(url);
+        Call<WeatherApiDataResponseModel> call = service.getWeatherApiData(url);
         call.enqueue(new Callback<WeatherApiDataResponseModel>() {
             @Override
             public void onResponse(Call<WeatherApiDataResponseModel> call, Response<WeatherApiDataResponseModel> response) {

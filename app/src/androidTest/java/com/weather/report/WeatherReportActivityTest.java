@@ -8,6 +8,8 @@ import android.view.View;
 
 import com.squareup.okhttp.mockwebserver.MockResponse;
 import com.squareup.okhttp.mockwebserver.MockWebServer;
+import com.weather.report.helper.Constants;
+import com.weather.report.view.WeatherReportActivity;
 
 import org.junit.After;
 import org.junit.Before;
@@ -45,15 +47,9 @@ public class WeatherReportActivityTest {
     }
 
 
-    /*@Test
-    public void testOptionMenuExistOrNot(){
-        View view = mActivity.findViewById(R.id.action_settings);
-        assertNotNull(view);
-    }
-*/
 
-   /* @Test
-    public void testQuoteIsShown() throws Exception {
+    @Test
+    public void testRandomDataIsShown() throws Exception {
         String fileName = "weather_report_200_response.json";
         server.enqueue(new MockResponse()
                 .setResponseCode(200)
@@ -62,17 +58,17 @@ public class WeatherReportActivityTest {
         Intent intent = new Intent();
         mActivityTestRule.launchActivity(intent);
 
-        onView(withId(R.id.fab)).check(matches(withEffectiveVisibility(ViewMatchers.Visibility.GONE)));
+        onView(withId(R.id.citySpinner)).check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
 
-    }*/
+    }
 
 
 
     @Test
-    public void testRandomQuoteRetrieval() throws Exception {
+    public void testRandomDataRetrieval() throws Exception {
 
         MockAdapterTest quoteOfTheDayMockAdapterTest = new MockAdapterTest();
-        quoteOfTheDayMockAdapterTest.testRandomQuoteRetrieval();
+        quoteOfTheDayMockAdapterTest.testRandomDataRetrieval();
     }
     @Test
     public void testRetryButtonShowsWhenError() throws Exception {

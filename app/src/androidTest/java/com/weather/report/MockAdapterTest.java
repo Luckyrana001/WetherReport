@@ -5,6 +5,7 @@ import android.support.test.filters.SmallTest;
 
 
 import com.weather.report.model.WeatherApiDataResponseModel;
+import com.weather.report.services.WeatherRestService;
 
 import junit.framework.Assert;
 
@@ -17,7 +18,7 @@ import retrofit2.mock.BehaviorDelegate;
 import retrofit2.mock.MockRetrofit;
 import retrofit2.mock.NetworkBehavior;
 
-import static com.weather.report.Constants.START_REQUEST;
+import static com.weather.report.helper.Constants.START_REQUEST;
 
 @SuppressWarnings("ALL")
 public class MockAdapterTest {
@@ -48,19 +49,19 @@ public class MockAdapterTest {
 
 
     @SmallTest
-    public void testRandomQuoteRetrieval() throws Exception {
+    public void testRandomDataRetrieval() throws Exception {
         BehaviorDelegate<WeatherRestService> delegate = mockRetrofit.create(WeatherRestService.class);
-        WeatherRestService mockQodService = new MockServiceTest(delegate);
+        WeatherRestService mockDataService = new MockServiceTest(delegate);
 
 
         //Actual Test
-        Call<WeatherApiDataResponseModel> mobileDataUsage = mockQodService.getMobileDataUsage(START_REQUEST);
-        Response<WeatherApiDataResponseModel> quoteOfTheDayResponse = mobileDataUsage.execute();
+        Call<WeatherApiDataResponseModel> mobileDataUsage = mockDataService.getWeatherApiData(START_REQUEST);
+        Response<WeatherApiDataResponseModel> weatherMockResponse = mobileDataUsage.execute();
 
 
 
         //Asserting response
-        Assert.assertTrue(quoteOfTheDayResponse.isSuccessful());
+        Assert.assertTrue(weatherMockResponse.isSuccessful());
 
     }
 

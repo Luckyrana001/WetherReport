@@ -2,6 +2,7 @@ package com.weather.report;
 
 import com.google.gson.Gson;
 import com.weather.report.model.WeatherApiDataResponseModel;
+import com.weather.report.services.WeatherRestService;
 
 import retrofit2.Call;
 import retrofit2.mock.BehaviorDelegate;
@@ -20,7 +21,7 @@ public class MockServiceTest implements WeatherRestService {
 
 
     @Override
-    public Call<WeatherApiDataResponseModel> getMobileDataUsage(String url) {
+    public Call<WeatherApiDataResponseModel> getWeatherApiData(String url) {
 
         String fileName = "weather_report_200_response.json";
         String data = null;
@@ -29,19 +30,16 @@ public class MockServiceTest implements WeatherRestService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-      WeatherApiDataResponseModel mobileDataUsageResponse = new Gson().fromJson(data,WeatherApiDataResponseModel.class);
+      WeatherApiDataResponseModel weatherApiDataResponseModel = new Gson().fromJson(data,WeatherApiDataResponseModel.class);
 
-        return delegate.returningResponse(mobileDataUsageResponse).getMobileDataUsage();
+        return delegate.returningResponse(weatherApiDataResponseModel).getWeatherApiData();
 
     }
 
     @Override
-    public Call<WeatherApiDataResponseModel> getMobileDataUsage() {
+    public Call<WeatherApiDataResponseModel> getWeatherApiData() {
         return null;
     }
 
-    @Override
-    public Call<WeatherApiDataResponseModel> getMobileDataUsage(String resourceId, String limit) {
-        return null;
-    }
+
 }

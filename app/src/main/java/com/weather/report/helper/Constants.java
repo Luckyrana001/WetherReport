@@ -1,4 +1,4 @@
-package com.weather.report;
+package com.weather.report.helper;
 
 public class Constants {
 

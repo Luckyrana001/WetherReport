@@ -21,7 +21,7 @@ import com.weather.report.services.IRemoteServices;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.weather.report.Constants.START_REQUEST;
+import static com.weather.report.helper.Constants.START_REQUEST;
 
 
 public class WeatherReportViewModel extends ViewModel {
@@ -152,7 +152,7 @@ public class WeatherReportViewModel extends ViewModel {
             DataUpdateModel dataUpdateModel = new DataUpdateModel();
             dataUpdateModel.setCityName(mlWeatherData.getValue().get(index).getName());
             dataUpdateModel.setTemprature((int) Math.round(mlWeatherData.getValue().get(index).getMain().getTemp()) + " \u2103");
-            dataUpdateModel.setUpdatedTime("12-june-2019");
+            dataUpdateModel.setUpdatedTime(Utils.getDate((mlWeatherData.getValue().get(index).getDt() *  1000), "EEEE hh:mm a"));
             dataUpdateModel.setWeather(mlWeatherData.getValue().get(index).getWeatherDataListArrayList().get(0).getDescription());
             dataUpdateModel.setWindSpeed(mlWeatherData.getValue().get(index).getWind().getSpeed() + " km/h");
             mlUpdateData.setValue(dataUpdateModel);

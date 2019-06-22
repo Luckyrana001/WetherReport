@@ -5,8 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".WeatherReportActivity"
+    tools:context=".view.WeatherReportActivity"
     tools:showIn="@layout/activity_main">
+
+
+    <TextView
+        android:text="@string/select_city_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/text_large"
+        android:textStyle="bold"
+        android:layout_marginTop="40dp"
+        android:gravity="center_vertical|center|center_horizontal"
+        />
 
 
     <Spinner
