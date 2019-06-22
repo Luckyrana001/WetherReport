@@ -49,8 +49,8 @@ public class MockAdapterTest {
 
     @SmallTest
     public void testRandomQuoteRetrieval() throws Exception {
-        BehaviorDelegate<MobileDataUsageRestService> delegate = mockRetrofit.create(MobileDataUsageRestService.class);
-        MobileDataUsageRestService mockQodService = new MockServiceTest(delegate);
+        BehaviorDelegate<WeatherRestService> delegate = mockRetrofit.create(WeatherRestService.class);
+        WeatherRestService mockQodService = new MockServiceTest(delegate);
 
 
         //Actual Test

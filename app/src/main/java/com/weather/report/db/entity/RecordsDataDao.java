@@ -28,7 +28,6 @@ public class RecordsDataDao {
     }
 
 
-
     @Override
     public String toString() {
         return "\nUser{" +

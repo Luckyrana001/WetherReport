@@ -1,5 +1,6 @@
 package com.weather.report.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
@@ -7,12 +8,58 @@ import java.util.ArrayList;
 public class WeatherListAllCitiesModel {
 
     String name;
-    @JsonProperty("help")
+    String dt;
+    String id;
+    @JsonProperty("clouds")
+    Clouds clouds;
+    @JsonProperty("wind")
     Wind wind = new Wind();
     @JsonProperty("weather")
     ArrayList<WeatherDataList> weatherDataListArrayList = new ArrayList<>();
+    @JsonProperty("main")
+    Main main;
+    @JsonProperty("sys")
+    Sys sys;
+    @JsonProperty("coord")
+    Coordinate coord;
+    @JsonIgnoreProperties("visibility")
+    String visibility;
 
+    public String getDt() {
+        return dt;
+    }
 
+    public void setDt(String dt) {
+        this.dt = dt;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Clouds getClouds() {
+        return clouds;
+    }
+
+    public void setClouds(Clouds clouds) {
+        this.clouds = clouds;
+    }
+
+    public Main getMain() {
+        return main;
+    }
+
+    public void setMain(Main main) {
+        this.main = main;
+    }
+
+    public void setVisibility(String visibility) {
+        this.visibility = visibility;
+    }
 
     public String getName() {
         return name;
@@ -21,7 +68,6 @@ public class WeatherListAllCitiesModel {
     public void setName(String name) {
         this.name = name;
     }
-
 
 
     public Wind getWind() {
@@ -40,15 +86,5 @@ public class WeatherListAllCitiesModel {
         this.weatherDataListArrayList = weatherDataListArrayList;
     }
 
-    public MainDataModel getMainDataModel() {
-        return mainDataModel;
-    }
-
-    public void setMainDataModel(MainDataModel mainDataModel) {
-        this.mainDataModel = mainDataModel;
-    }
-
-    @JsonProperty("main")
-    MainDataModel mainDataModel = new MainDataModel();
 
 }

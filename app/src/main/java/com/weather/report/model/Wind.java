@@ -8,7 +8,13 @@ public class Wind {
     }*/
 
 
-    String speed,deg;
+    String speed;
+    String deg;
+
+    public void setDeg(String deg) {
+        this.deg = deg;
+    }
+
     public String getSpeed() {
         return speed;
     }

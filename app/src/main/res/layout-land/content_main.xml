@@ -18,7 +18,7 @@
         android:layout_marginRight="70dp"
         android:layout_marginTop="20dp"
         android:paddingLeft="20dp"
-        android:entries="@array/city_list">
+       >
 
 
     </Spinner>

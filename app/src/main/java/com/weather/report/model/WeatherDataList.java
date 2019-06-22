@@ -15,6 +15,15 @@ public class WeatherDataList {
     String id;
     String main;
     String description;
+    String icon;
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
 
     public String getId() {
         return id;

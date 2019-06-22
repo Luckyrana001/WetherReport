@@ -45,14 +45,14 @@ public class WeatherReportActivityTest {
     }
 
 
-    @Test
+    /*@Test
     public void testOptionMenuExistOrNot(){
         View view = mActivity.findViewById(R.id.action_settings);
         assertNotNull(view);
     }
+*/
 
-
-    @Test
+   /* @Test
     public void testQuoteIsShown() throws Exception {
         String fileName = "weather_report_200_response.json";
         server.enqueue(new MockResponse()
@@ -64,7 +64,7 @@ public class WeatherReportActivityTest {
 
         onView(withId(R.id.fab)).check(matches(withEffectiveVisibility(ViewMatchers.Visibility.GONE)));
 
-    }
+    }*/
 
 
 
@@ -79,7 +79,7 @@ public class WeatherReportActivityTest {
         String fileName = "weather_report_401_not_found.json";
 
         server.enqueue(new MockResponse()
-                .setResponseCode(404)
+                .setResponseCode(401)
                 .setBody(RestServiceTestHelper.getStringFromFile(getInstrumentation().getContext(), fileName)));
 
         Intent intent = new Intent();

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+
+
+        <TextView
+            android:id="@+id/cityNameTv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:paddingLeft="3dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:text="Sydney,AU"
+            android:gravity="center_horizontal|center_vertical"
+            android:textSize="@dimen/text_large"
+            android:textStyle="bold" />
+
+</LinearLayout>

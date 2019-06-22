@@ -5,8 +5,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 public class Utils {
-    Context context;
     public static final String CACHE_CONTROL = "Cache-Control";
+    Context context;
 
     public Utils(Context context) {
         this.context = context;
@@ -29,7 +29,6 @@ public class Utils {
         }
         return false;
     }
-
 
 
 }
