@@ -1,8 +1,8 @@
 package com.weather.report.Presenter;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 import android.os.AsyncTask;
 
 import com.google.gson.Gson;
@@ -39,7 +39,7 @@ public class WeatherReportViewModel extends ViewModel {
         mRemoteServices = rservice;
         recordsDao = AppDatabase.getInstance(BaseFlyContext.getInstant().getApplicationContext()).userDao();
 
-        getDataFromAPiOrCacheOrFromDb();
+        getData();
 
 
     }
@@ -95,12 +95,12 @@ public class WeatherReportViewModel extends ViewModel {
         }.execute();
     }
 
-    public void getDataFromAPiOrCacheOrFromDb() {
+    public void getData() {
         Utils utils = new Utils(BaseFlyContext.getInstant().getApplicationContext());
         if (utils.isNetworkAvailable()) {
             mRemoteServices
                     .getMobileDataUsage(START_REQUEST)
-                    .doOnSubscribe(disposable -> LCEStatus.loading("Loading Data Data ..."))
+                    .doOnSubscribe(disposable -> LCEStatus.loading("Loading New Data ..."))
                     .doOnTerminate(() -> LCEStatus.success())
                     .subscribe(result -> {
 
@@ -108,7 +108,7 @@ public class WeatherReportViewModel extends ViewModel {
                         mobileDataConsumptionYearlyModel.setCnt(result.getCnt());
                         mobileDataConsumptionYearlyModel.setList(result.getList());
 
-                        mlWarningStatus.postValue("Weather Data Updated Sucessfuly.");
+                        mlWarningStatus.postValue("Weather Data Updated Successfully.");
                         mlWeatherData.setValue(result.getList());
 
                         insertDataIntoDB(new Gson().toJson(result));
@@ -118,7 +118,7 @@ public class WeatherReportViewModel extends ViewModel {
                         if (throwable instanceof ServiceRuntimeException) {
                             getDataFromDb();
                         } else {
-                            mlLceStatus.postValue(LCEStatus.error("Data Error", "Data Load Failed."));
+                            mlLceStatus.postValue(LCEStatus.error("Data Error", "Data Loading Failed."));
                         }
                     });
 

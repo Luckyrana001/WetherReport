@@ -1,11 +1,11 @@
 package com.weather.report.helper;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class Utils {
     public static final String CACHE_CONTROL = "Cache-Control";

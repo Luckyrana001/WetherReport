@@ -1,9 +1,9 @@
 package com.weather.report.view;
 
-import android.arch.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
@@ -136,11 +136,11 @@ public class WeatherReportActivity extends AppCompatActivity implements AdapterV
 
     private void showLceStatus(LCEStatus status) {
         if (status.getStatus() == LCEStatus.Status.SUCCESS) {
-            showToast("New Data Available.");
+            showToast(status.getMsg());
         } else if (status.getStatus() == LCEStatus.Status.ERROR) {
-             showToast("Error! Please try Again Later.");
+            showToast(status.getMsg());
         } else if (status.getStatus() == LCEStatus.Status.LOADING) {
-            showToast("Loading Data...");
+            showToast(status.getMsg());
         }
     }
 

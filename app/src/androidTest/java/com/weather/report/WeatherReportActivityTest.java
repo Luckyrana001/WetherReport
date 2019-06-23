@@ -1,9 +1,10 @@
 package com.weather.report;
 
 import android.content.Intent;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.espresso.matcher.ViewMatchers;
-import android.support.test.rule.ActivityTestRule;
+import androidx.test.InstrumentationRegistry;
+import androidx.test.espresso.ViewInteraction;
+import androidx.test.espresso.matcher.ViewMatchers;
+import androidx.test.rule.ActivityTestRule;
 import android.view.View;
 
 import com.squareup.okhttp.mockwebserver.MockResponse;
@@ -16,11 +17,12 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static android.support.test.InstrumentationRegistry.getInstrumentation;
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.InstrumentationRegistry.getInstrumentation;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.*;
 
 public class WeatherReportActivityTest {
@@ -83,6 +85,14 @@ public class WeatherReportActivityTest {
 
     }
 
+    /**
+     * Initial values testing.
+     */
+    /*@Test
+    public void checkCityValueTest() {
+        ViewInteraction cityValueTest = onView(withId(R.id.cityValueTv));
+        cityValueTest.check(matches(withText("Sydney")));
+    }*/
 
     @After
     public void tearDown() throws Exception {

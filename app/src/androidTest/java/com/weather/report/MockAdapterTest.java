@@ -1,7 +1,7 @@
 package com.weather.report;
 
 
-import android.support.test.filters.SmallTest;
+import androidx.test.filters.SmallTest;
 
 
 import com.weather.report.model.WeatherApiDataResponseModel;

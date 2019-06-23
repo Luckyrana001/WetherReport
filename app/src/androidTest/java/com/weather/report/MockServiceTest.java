@@ -7,7 +7,7 @@ import com.weather.report.services.WeatherRestService;
 import retrofit2.Call;
 import retrofit2.mock.BehaviorDelegate;
 
-import static android.support.test.InstrumentationRegistry.getInstrumentation;
+import static androidx.test.InstrumentationRegistry.getInstrumentation;
 
 public class MockServiceTest implements WeatherRestService {
 
