@@ -10,15 +10,14 @@
 
 
     <TextView
-        android:text="@string/select_city_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:textSize="@dimen/text_large"
-        android:textStyle="bold"
         android:layout_marginTop="40dp"
         android:gravity="center_vertical|center|center_horizontal"
-        />
+        android:text="@string/select_city_label"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/text_large"
+        android:textStyle="bold" />
 
 
     <Spinner
@@ -26,61 +25,58 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="150dp"
+        android:layout_marginTop="80dp"
         android:layout_marginRight="150dp"
         android:layout_marginBottom="100dp"
-        android:layout_marginTop="80dp"
-        android:paddingLeft="50dp"
-        >
+        android:paddingLeft="50dp">
 
 
     </Spinner>
 
 
-
     <TableLayout
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:stretchColumns="*"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center|center_vertical"
         android:layout_marginLeft="100dp"
+        android:layout_marginTop="200dp"
         android:layout_marginRight="100dp"
         android:layout_marginBottom="100dp"
-        android:layout_marginTop="200dp"
-        android:layout_gravity="center_horizontal|center|center_vertical"
-        >
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:stretchColumns="*">
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="2"
             android:background="@drawable/divider_drawable"
-           >
+            android:weightSum="2">
 
             <TextView
-                android:text="@string/city_label"
                 android:layout_width="0dp"
-                android:layout_weight=".9"
                 android:layout_height="50dp"
-                android:textColor="@android:color/black"
-                android:paddingLeft="10dp"
+                android:layout_weight=".9"
                 android:gravity="center_vertical|left|center_horizontal"
-                 />
+                android:paddingLeft="10dp"
+                android:text="@string/city_label"
+                android:textColor="@android:color/black" />
+
             <View
-                android:layout_weight=".01"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:background="@android:color/darker_gray"/>
+                android:layout_weight=".01"
+                android:background="@android:color/darker_gray" />
+
             <TextView
                 android:id="@+id/cityValueTv"
-                android:text=""
                 android:layout_width="0dp"
-                android:layout_weight="1.1"
                 android:layout_height="50dp"
-                android:textColor="@android:color/black"
-
+                android:layout_weight="1.1"
+                android:gravity="center_vertical|left|center_horizontal"
                 android:paddingLeft="10dp"
-                android:gravity="center_vertical|left|center_horizontal"/>
+
+                android:text=""
+                android:textColor="@android:color/black" />
 
         </TableRow>
 
@@ -89,33 +85,34 @@
             android:layout_height="wrap_content"
             android:background="@drawable/divider_drawable_white"
             android:divider="@android:color/black"
-            android:weightSum="2"
-            >
+            android:weightSum="2">
 
             <TextView
-                android:text="@string/update_time_label"
                 android:layout_width="0dp"
-                android:layout_weight=".9"
                 android:layout_height="50dp"
-                android:textColor="@android:color/black"
-
+                android:layout_weight=".9"
+                android:gravity="center_vertical|left|center_horizontal"
                 android:paddingLeft="10dp"
-                android:gravity="center_vertical|left|center_horizontal"/>
+
+                android:text="@string/update_time_label"
+                android:textColor="@android:color/black" />
+
             <View
-                android:layout_weight=".01"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:background="@android:color/darker_gray"/>
+                android:layout_weight=".01"
+                android:background="@android:color/darker_gray" />
+
             <TextView
                 android:id="@+id/updateTimeValueTv"
-                android:text=""
                 android:layout_width="0dp"
-                android:layout_weight="1.1"
                 android:layout_height="50dp"
-                android:textColor="@android:color/black"
-
+                android:layout_weight="1.1"
+                android:gravity="center_vertical|left|center_horizontal"
                 android:paddingLeft="10dp"
-                android:gravity="center_vertical|left|center_horizontal"/>
+
+                android:text=""
+                android:textColor="@android:color/black" />
 
         </TableRow>
 
@@ -124,31 +121,33 @@
             android:layout_height="wrap_content"
             android:background="@drawable/divider_drawable"
             android:divider="@android:color/black"
-            android:weightSum="2"
-            >
+            android:weightSum="2">
 
             <TextView
-                android:text="@string/weather_label"
                 android:layout_width="0dp"
-                android:layout_weight=".9"
                 android:layout_height="50dp"
-                android:textColor="@android:color/black" android:paddingLeft="10dp"
-                android:gravity="center_vertical|left|center_horizontal"/>
+                android:layout_weight=".9"
+                android:gravity="center_vertical|left|center_horizontal"
+                android:paddingLeft="10dp"
+                android:text="@string/weather_label"
+                android:textColor="@android:color/black" />
+
             <View
-                android:layout_weight=".01"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:background="@android:color/darker_gray"/>
+                android:layout_weight=".01"
+                android:background="@android:color/darker_gray" />
+
             <TextView
                 android:id="@+id/wheatherValueTv"
-                android:text=""
                 android:layout_width="0dp"
-                android:layout_weight="1.1"
                 android:layout_height="50dp"
-                android:textColor="@android:color/black"
-
+                android:layout_weight="1.1"
+                android:gravity="center_vertical|left|center_horizontal"
                 android:paddingLeft="10dp"
-                android:gravity="center_vertical|left|center_horizontal"/>
+
+                android:text=""
+                android:textColor="@android:color/black" />
 
         </TableRow>
 
@@ -157,33 +156,33 @@
             android:layout_height="wrap_content"
             android:background="@drawable/divider_drawable_white"
             android:divider="@android:color/black"
-            android:weightSum="2"
-            >
+            android:weightSum="2">
 
             <TextView
-                android:text="@string/temprature_label"
                 android:layout_width="0dp"
-                android:layout_weight=".9"
                 android:layout_height="50dp"
-                android:textColor="@android:color/black"
+                android:layout_weight=".9"
+                android:gravity="center_vertical|left|center_horizontal"
                 android:paddingLeft="10dp"
-                android:gravity="center_vertical|left|center_horizontal"/>
+                android:text="@string/temprature_label"
+                android:textColor="@android:color/black" />
 
             <View
-                android:layout_weight=".01"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:background="@android:color/darker_gray"/>
+                android:layout_weight=".01"
+                android:background="@android:color/darker_gray" />
+
             <TextView
                 android:id="@+id/tempratureValueTv"
-                android:text=""
                 android:layout_width="0dp"
-                android:layout_weight="1.1"
                 android:layout_height="50dp"
-                android:textColor="@android:color/black"
-
+                android:layout_weight="1.1"
+                android:gravity="center_vertical|left|center_horizontal"
                 android:paddingLeft="10dp"
-                android:gravity="center_vertical|left|center_horizontal"/>
+
+                android:text=""
+                android:textColor="@android:color/black" />
 
         </TableRow>
 
@@ -192,32 +191,33 @@
             android:layout_height="wrap_content"
             android:background="@drawable/divider_drawable"
             android:divider="@android:color/black"
-            android:weightSum="2"
-            >
+            android:weightSum="2">
 
             <TextView
-                android:text="@string/wind_label"
                 android:layout_width="0dp"
-                android:layout_weight=".9"
                 android:layout_height="50dp"
-                android:textColor="@android:color/black"
+                android:layout_weight=".9"
+                android:gravity="center_vertical|left|center_horizontal"
                 android:paddingLeft="10dp"
-                android:gravity="center_vertical|left|center_horizontal"/>
+                android:text="@string/wind_label"
+                android:textColor="@android:color/black" />
+
             <View
-                android:layout_weight=".01"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:background="@android:color/darker_gray"/>
+                android:layout_weight=".01"
+                android:background="@android:color/darker_gray" />
+
             <TextView
                 android:id="@+id/windValueTv"
-                android:text=""
                 android:layout_width="0dp"
-                android:layout_weight="1.1"
                 android:layout_height="50dp"
-                android:textColor="@android:color/black"
-
+                android:layout_weight="1.1"
+                android:gravity="center_vertical|left|center_horizontal"
                 android:paddingLeft="10dp"
-                android:gravity="center_vertical|left|center_horizontal"/>
+
+                android:text=""
+                android:textColor="@android:color/black" />
 
         </TableRow>
     </TableLayout>

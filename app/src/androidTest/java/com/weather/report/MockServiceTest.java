@@ -18,8 +18,6 @@ public class MockServiceTest implements WeatherRestService {
     }
 
 
-
-
     @Override
     public Call<WeatherApiDataResponseModel> getWeatherApiData(String url) {
 
@@ -30,7 +28,7 @@ public class MockServiceTest implements WeatherRestService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-      WeatherApiDataResponseModel weatherApiDataResponseModel = new Gson().fromJson(data,WeatherApiDataResponseModel.class);
+        WeatherApiDataResponseModel weatherApiDataResponseModel = new Gson().fromJson(data, WeatherApiDataResponseModel.class);
 
         return delegate.returningResponse(weatherApiDataResponseModel).getWeatherApiData();
 

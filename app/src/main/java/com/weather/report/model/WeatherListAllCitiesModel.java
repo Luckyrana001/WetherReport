@@ -8,16 +8,6 @@ import java.util.ArrayList;
 public class WeatherListAllCitiesModel {
 
     String name;
-
-
-    public long getDt() {
-        return dt;
-    }
-
-    public void setDt(long dt) {
-        this.dt = dt;
-    }
-
     long dt;
     String id;
     @JsonProperty("clouds")
@@ -35,7 +25,13 @@ public class WeatherListAllCitiesModel {
     @JsonIgnoreProperties("visibility")
     String visibility;
 
+    public long getDt() {
+        return dt;
+    }
 
+    public void setDt(long dt) {
+        this.dt = dt;
+    }
 
     public String getId() {
         return id;

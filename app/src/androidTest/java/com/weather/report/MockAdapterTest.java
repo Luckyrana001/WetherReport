@@ -3,7 +3,6 @@ package com.weather.report;
 
 import androidx.test.filters.SmallTest;
 
-
 import com.weather.report.model.WeatherApiDataResponseModel;
 import com.weather.report.services.WeatherRestService;
 
@@ -26,13 +25,13 @@ public class MockAdapterTest {
     private Retrofit retrofit;
 
 
-   public MockAdapterTest(){
-       try {
-           setUp();
-       }catch (Exception e){
-           e.printStackTrace();
-       }
-     }
+    public MockAdapterTest() {
+        try {
+            setUp();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public void setUp() throws Exception {
         retrofit = new Retrofit.Builder().baseUrl("http://test.com")
@@ -57,7 +56,6 @@ public class MockAdapterTest {
         //Actual Test
         Call<WeatherApiDataResponseModel> mobileDataUsage = mockDataService.getWeatherApiData(START_REQUEST);
         Response<WeatherApiDataResponseModel> weatherMockResponse = mobileDataUsage.execute();
-
 
 
         //Asserting response

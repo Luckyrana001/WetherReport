@@ -1,11 +1,12 @@
 package com.weather.report;
 
 import android.content.Intent;
+import android.view.View;
+
 import androidx.test.InstrumentationRegistry;
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.rule.ActivityTestRule;
-import android.view.View;
 
 import com.squareup.okhttp.mockwebserver.MockResponse;
 import com.squareup.okhttp.mockwebserver.MockWebServer;
@@ -23,7 +24,7 @@ import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 public class WeatherReportActivityTest {
 
@@ -32,6 +33,7 @@ public class WeatherReportActivityTest {
 
     private WeatherReportActivity mActivity = null;
     private MockWebServer server;
+
     @Before
     public void setUp() throws Exception {
         mActivity = mActivityTestRule.getActivity();
@@ -43,11 +45,10 @@ public class WeatherReportActivityTest {
     }
 
     @Test
-    public void testSpinnerViewExistOrNot(){
-      View view = mActivity.findViewById(R.id.citySpinner);
-      assertNotNull(view);
+    public void testSpinnerViewExistOrNot() {
+        View view = mActivity.findViewById(R.id.citySpinner);
+        assertNotNull(view);
     }
-
 
 
     @Test
@@ -65,13 +66,13 @@ public class WeatherReportActivityTest {
     }
 
 
-
     @Test
     public void testRandomDataRetrieval() throws Exception {
 
         MockAdapterTest quoteOfTheDayMockAdapterTest = new MockAdapterTest();
         quoteOfTheDayMockAdapterTest.testRandomDataRetrieval();
     }
+
     @Test
     public void testRetryButtonShowsWhenError() throws Exception {
         String fileName = "weather_report_401_not_found.json";
@@ -88,11 +89,11 @@ public class WeatherReportActivityTest {
     /**
      * Initial values testing.
      */
-    /*@Test
+    @Test
     public void checkCityValueTest() {
         ViewInteraction cityValueTest = onView(withId(R.id.cityValueTv));
         cityValueTest.check(matches(withText("Sydney")));
-    }*/
+    }
 
     @After
     public void tearDown() throws Exception {

@@ -6,7 +6,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class  RestServiceTestHelper {
+public class RestServiceTestHelper {
 
     public static String convertStreamToString(InputStream is) throws Exception {
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));

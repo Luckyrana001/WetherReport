@@ -1,14 +1,15 @@
 package com.weather.report.view;
 
-import androidx.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.weather.report.Presenter.WeatherReportViewModel;
 import com.weather.report.Presenter.WeatherReportViewModelProvider;
@@ -47,6 +48,9 @@ public class WeatherReportActivity extends AppCompatActivity implements AdapterV
     @Bind(R.id.citySpinner)
     Spinner citySpinner;
     private WeatherReportViewModel viewModel;
+    private CityDropDownAdapter customAdapter;
+    private ArrayList<WeatherListAllCitiesModel> weatherRecordList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,21 +71,27 @@ public class WeatherReportActivity extends AppCompatActivity implements AdapterV
         IRemoteServices remoteServices = new RemoteServices();
         WeatherReportViewModelProvider postProvider = new WeatherReportViewModelProvider(remoteServices);
 
-        setupViewModel(postProvider);
+        viewModel = ViewModelProviders.of(this, postProvider).get(WeatherReportViewModel.class);
+
+        weatherRecordList = new ArrayList<>();
+        customAdapter = new CityDropDownAdapter(this, weatherRecordList);
+        citySpinner.setAdapter(customAdapter);
 
         citySpinner.setOnItemSelectedListener(this);
+
         setUpObservers();
 
 
     }
+
 
     @Override
     public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
 
         Spinner spinner = (Spinner) arg0;
         if (spinner.getId() == R.id.citySpinner) {
-
             viewModel.updateSelectedSpinnerIndex(citySpinner.getSelectedItemPosition());
+            //  citySpinner.setSelection(viewModel.getSelectedSpinnerIndex());
         }
     }
 
@@ -90,10 +100,6 @@ public class WeatherReportActivity extends AppCompatActivity implements AdapterV
 
     }
 
-    private WeatherReportViewModel setupViewModel(WeatherReportViewModelProvider postProvider) {
-        return viewModel = ViewModelProviders.of(this, postProvider).get(WeatherReportViewModel.class);
-
-    }
 
     private void setUpObservers() {
 
@@ -123,9 +129,12 @@ public class WeatherReportActivity extends AppCompatActivity implements AdapterV
     }
 
     private void updateDataset(ArrayList<WeatherListAllCitiesModel> weatherDataList) {
+        weatherRecordList.clear();
+        weatherRecordList.addAll(weatherDataList);
+        customAdapter.notifyDataSetChanged();
 
-        CityDropDownAdapter customAdapter = new CityDropDownAdapter(this, weatherDataList);
-        citySpinner.setAdapter(customAdapter);
+        viewModel.updateLatestData();
+
     }
 
 

@@ -45,7 +45,7 @@ public class RequestHandler {
                     .client(new OkHttpClient())
                     .build();
 
-     service = retrofit.create(WeatherRestService.class);
+            service = retrofit.create(WeatherRestService.class);
 
 
         } catch (Exception e) {
@@ -100,8 +100,6 @@ public class RequestHandler {
             }
         });
     }
-
-
 
 
 }
