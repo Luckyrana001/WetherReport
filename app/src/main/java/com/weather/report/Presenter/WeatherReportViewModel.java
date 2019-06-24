@@ -1,7 +1,7 @@
 package com.weather.report.Presenter;
 
+import android.content.Context;
 import android.net.ConnectivityManager;
-import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -10,111 +10,77 @@ import androidx.lifecycle.ViewModel;
 import com.google.gson.Gson;
 import com.weather.report.db.AppDatabase;
 import com.weather.report.db.dao.RecordsDao;
-import com.weather.report.db.entity.RecordsDataDao;
-import com.weather.report.helper.BaseFlyContext;
 import com.weather.report.helper.LCEStatus;
 import com.weather.report.helper.ServiceRuntimeException;
 import com.weather.report.helper.Utils;
 import com.weather.report.model.DataUpdateModel;
 import com.weather.report.model.WeatherApiDataResponseModel;
 import com.weather.report.model.WeatherListAllCitiesModel;
+import com.weather.report.services.ILocalServices;
 import com.weather.report.services.IRemoteServices;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import io.andref.rx.network.RxNetwork;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 import static android.content.Context.CONNECTIVITY_SERVICE;
+import static com.weather.report.helper.Constants.DATA_INSERT_FAILED;
+import static com.weather.report.helper.Constants.DATA_LOAD_FAILED_TITLE;
+import static com.weather.report.helper.Constants.LOADING_DATA;
+import static com.weather.report.helper.Constants.RETRY_AGAIN;
 import static com.weather.report.helper.Constants.START_REQUEST;
+import static com.weather.report.helper.Constants.TABLE_DATA_UPDATED;
+import static com.weather.report.helper.Constants.TABLE_INSERT_ERROR;
+import static com.weather.report.helper.Constants.WEATHER_DATA_UPDATED;
 
 
 public class WeatherReportViewModel extends ViewModel {
+    CompositeDisposable compositeDisposable = new CompositeDisposable();
     private IRemoteServices mRemoteServices;
-
-
+    private ILocalServices mLocalServices;
     private MutableLiveData<LCEStatus> mlLceStatus = new MutableLiveData<>();
     private MutableLiveData<String> mlWarningStatus = new MutableLiveData<>();
     private MutableLiveData<DataUpdateModel> mlUpdateData = new MutableLiveData<>();
-    private MutableLiveData<ArrayList<WeatherListAllCitiesModel>> mlWeatherData = new MutableLiveData<ArrayList<WeatherListAllCitiesModel>>();
+    private MutableLiveData<ArrayList<WeatherListAllCitiesModel>> mlWeatherData = new MutableLiveData<>();
     private RecordsDao recordsDao;
     private int selectedSpinerIndex = 0;
+    private Context context;
 
-    public WeatherReportViewModel(IRemoteServices rservice) {
+    public WeatherReportViewModel(IRemoteServices rservice, ILocalServices lservice, Context ctx) {
 
         mRemoteServices = rservice;
-        recordsDao = AppDatabase.getInstance(BaseFlyContext.getInstant().getApplicationContext()).userDao();
+        mLocalServices = lservice;
+        context = ctx;
 
-        ConnectivityManager connectivityManager = (ConnectivityManager) BaseFlyContext.getInstant().getApplicationContext().getSystemService(CONNECTIVITY_SERVICE);
-        RxNetwork.connectivityChanges(BaseFlyContext.getInstant().getApplicationContext(), connectivityManager)
+        recordsDao = AppDatabase.getInstance(context).userDao();
+
+
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(CONNECTIVITY_SERVICE);
+        RxNetwork.connectivityChanges(context, connectivityManager)
                 .subscribe(connected -> {
                     if (connected)
                         getDataFromApi();
                     else
                         getDataFromDb();
 
+                }, throwable -> {
+                    if (throwable instanceof ServiceRuntimeException) {
+                        throwable.printStackTrace();
+                    }
                 });
 
-    }
 
-
-    public void insertDataIntoDB(final String result) {
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... params) {
-                recordsDao.deleteAll();
-
-                RecordsDataDao user = new RecordsDataDao();
-                user.setRecords(result);
-                recordsDao.insertAll(user);
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void result) {
-                System.out.print("Table data deleted");
-            }
-        }.execute();
-    }
-
-    public void getDataFromDb() {
-        new AsyncTask<Void, Void, ArrayList<WeatherListAllCitiesModel>>() {
-            @Override
-            protected ArrayList<WeatherListAllCitiesModel> doInBackground(Void... params) {
-                try {
-                    List<RecordsDataDao> data = recordsDao.getAll();
-                    RecordsDataDao value = data.get(0);
-                    String records = value.getRecords();
-                    WeatherApiDataResponseModel recordData = new Gson().fromJson(records, WeatherApiDataResponseModel.class);
-                    ArrayList<WeatherListAllCitiesModel> weatherDatalist = recordData.getList();
-
-                    return weatherDatalist;
-                } catch (Exception e) {
-                    return null;
-                }
-            }
-
-            @Override
-            protected void onPostExecute(ArrayList<WeatherListAllCitiesModel> getWeatherData) {
-
-
-                if (getWeatherData == null || getWeatherData.isEmpty()) {
-                    mlLceStatus.postValue(LCEStatus.error("Data Load Failed", "Please check your internet connection and retry again."));
-                    LCEStatus.success();
-                } else {
-                    LCEStatus.success();
-                    mlWeatherData.setValue(getWeatherData);
-                }
-            }
-        }.execute();
     }
 
     public void getDataFromApi() {
-        Utils utils = new Utils(BaseFlyContext.getInstant().getApplicationContext());
+        Utils utils = new Utils(context);
         if (utils.isNetworkAvailable()) {
             mRemoteServices
                     .getMobileDataUsage(START_REQUEST)
-                    .doOnSubscribe(disposable -> LCEStatus.loading("Loading New Data ..."))
+                    .doOnSubscribe(disposable -> LCEStatus.loading(LOADING_DATA))
                     .doOnTerminate(() -> LCEStatus.success())
                     .subscribe(result -> {
 
@@ -122,7 +88,7 @@ public class WeatherReportViewModel extends ViewModel {
                         mobileDataConsumptionYearlyModel.setCnt(result.getCnt());
                         mobileDataConsumptionYearlyModel.setList(result.getList());
 
-                        mlWarningStatus.postValue("Weather Data Updated Successfully.");
+                        mlWarningStatus.postValue(WEATHER_DATA_UPDATED);
                         mlWeatherData.setValue(result.getList());
 
                         insertDataIntoDB(new Gson().toJson(result));
@@ -132,13 +98,46 @@ public class WeatherReportViewModel extends ViewModel {
                         if (throwable instanceof ServiceRuntimeException) {
                             getDataFromDb();
                         } else {
-                            mlLceStatus.postValue(LCEStatus.error("Data Error", "Data Loading Failed."));
+                            mlLceStatus.postValue(LCEStatus.error(DATA_LOAD_FAILED_TITLE, RETRY_AGAIN));
                         }
                     });
 
         } else {
             getDataFromDb();
         }
+    }
+
+    public void insertDataIntoDB(final String result) {
+        Disposable dbDataDisposable = mLocalServices.insertDataIntoDatabase(recordsDao, result)
+                .subscribeOn(Schedulers.single())
+                .subscribe(getWeatherData -> {
+                    System.out.print(TABLE_DATA_UPDATED);
+                }, throwable -> {
+                    mlLceStatus.postValue(LCEStatus.error(DATA_INSERT_FAILED, TABLE_INSERT_ERROR));
+                });
+
+
+        compositeDisposable.add(dbDataDisposable);
+
+    }
+
+    public void getDataFromDb() {
+        Disposable dbDataDisposable = mLocalServices.getDataFromDatabase(recordsDao)
+                .subscribeOn(Schedulers.single())
+                .subscribe(getWeatherData -> {
+                    if (getWeatherData == null || getWeatherData.isEmpty()) {
+                        mlLceStatus.postValue(LCEStatus.error(DATA_LOAD_FAILED_TITLE, RETRY_AGAIN));
+                    } else {
+                        LCEStatus.success();
+                        mlWeatherData.postValue(getWeatherData);
+                    }
+
+                });
+
+
+        compositeDisposable.add(dbDataDisposable);
+
+
     }
 
 
@@ -163,12 +162,12 @@ public class WeatherReportViewModel extends ViewModel {
     public void updateSelectedSpinnerIndex(int index) {
         // update selected index
         selectedSpinerIndex = index;
-        Utils utils = new Utils(BaseFlyContext.getInstant().getApplicationContext());
+        Utils utils = new Utils(context);
         if (utils.isNetworkAvailable()) {
             // get new Data from api
             getDataFromApi();
         } else {
-            // update data from db in case api fail to load
+            // update data from db
             updateLatestData();
         }
 
@@ -185,7 +184,13 @@ public class WeatherReportViewModel extends ViewModel {
             dataUpdateModel.setWindSpeed(mlWeatherData.getValue().get(selectedSpinerIndex).getWind().getSpeed() + " km/h");
             mlUpdateData.setValue(dataUpdateModel);
         } else {
-            mlWarningStatus.postValue("Please check your internet connection and retry again.");
+            mlWarningStatus.postValue(RETRY_AGAIN);
         }
+    }
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        compositeDisposable.dispose();
     }
 }

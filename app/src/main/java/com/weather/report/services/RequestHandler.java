@@ -3,13 +3,11 @@ package com.weather.report.services;
 import android.util.Log;
 
 import com.google.gson.reflect.TypeToken;
-import com.weather.report.helper.BaseFlyContext;
 import com.weather.report.helper.Constants;
 import com.weather.report.helper.IResponseReceivedNotifyInterface;
 import com.weather.report.helper.RequestType;
 import com.weather.report.helper.ResponseArgs;
 import com.weather.report.helper.ResponseStatus;
-import com.weather.report.helper.Utils;
 import com.weather.report.model.WeatherApiDataResponseModel;
 
 import java.lang.annotation.Annotation;
@@ -27,9 +25,7 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 public class RequestHandler {
     private static final String TAG = RequestHandler.class.getName();
 
-    private static final int TIMEOUT_VALUE = 60000;
     public static RequestHandler requestHandler;
-    public static Utils utils;
     private Retrofit retrofit;
     private WeatherRestService service;
 
@@ -37,8 +33,6 @@ public class RequestHandler {
 
 
         try {
-            utils = new Utils(BaseFlyContext.getInstant().getApplicationContext());
-
             retrofit = new Retrofit.Builder()
                     .baseUrl(Constants.BASE_URL)
                     .addConverterFactory(JacksonConverterFactory.create())

@@ -15,7 +15,7 @@ public interface RecordsDao {
     List<RecordsDataDao> getAll();
 
     @Insert
-    void insertAll(RecordsDataDao... users);
+    Long[] insertAll(RecordsDataDao... users);
 
     @Delete
     void delete(RecordsDataDao user);

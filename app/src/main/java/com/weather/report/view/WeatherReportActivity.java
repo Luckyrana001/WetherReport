@@ -5,21 +5,22 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.weather.report.Presenter.WeatherReportViewModel;
 import com.weather.report.Presenter.WeatherReportViewModelProvider;
 import com.weather.report.R;
-import com.weather.report.helper.BaseFlyContext;
 import com.weather.report.helper.CityDropDownAdapter;
 import com.weather.report.helper.LCEStatus;
 import com.weather.report.model.DataUpdateModel;
 import com.weather.report.model.WeatherListAllCitiesModel;
 import com.weather.report.services.IRemoteServices;
+import com.weather.report.services.LocalServices;
 import com.weather.report.services.RemoteServices;
 
 import java.util.ArrayList;
@@ -44,6 +45,9 @@ public class WeatherReportActivity extends AppCompatActivity implements AdapterV
     @Bind(R.id.windValueTv)
     TextView windValueTv;
 
+    @Bind(R.id.coordinatorLayout)
+    CoordinatorLayout coordinatorLayout;
+
 
     @Bind(R.id.citySpinner)
     Spinner citySpinner;
@@ -64,12 +68,11 @@ public class WeatherReportActivity extends AppCompatActivity implements AdapterV
 
         // Initializing  Butterknife library
         ButterKnife.bind(this);
-        BaseFlyContext.getInstant().setActivity(this);
 
 
         // Initializing remote services and view model provide instance
         IRemoteServices remoteServices = new RemoteServices();
-        WeatherReportViewModelProvider postProvider = new WeatherReportViewModelProvider(remoteServices);
+        WeatherReportViewModelProvider postProvider = new WeatherReportViewModelProvider(remoteServices, new LocalServices(), getApplicationContext());
 
         viewModel = ViewModelProviders.of(this, postProvider).get(WeatherReportViewModel.class);
 
@@ -91,7 +94,6 @@ public class WeatherReportActivity extends AppCompatActivity implements AdapterV
         Spinner spinner = (Spinner) arg0;
         if (spinner.getId() == R.id.citySpinner) {
             viewModel.updateSelectedSpinnerIndex(citySpinner.getSelectedItemPosition());
-            //  citySpinner.setSelection(viewModel.getSelectedSpinnerIndex());
         }
     }
 
@@ -139,7 +141,8 @@ public class WeatherReportActivity extends AppCompatActivity implements AdapterV
 
 
     public void showToast(String message) {
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+        Snackbar snackbar = Snackbar.make(coordinatorLayout, message, Snackbar.LENGTH_SHORT);
+        snackbar.show();
     }
 
 

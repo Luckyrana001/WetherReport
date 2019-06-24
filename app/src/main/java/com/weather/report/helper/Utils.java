@@ -8,7 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class Utils {
-    public static final String CACHE_CONTROL = "Cache-Control";
     Context context;
 
     public Utils(Context context) {
