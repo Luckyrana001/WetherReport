@@ -35,7 +35,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 
 
-    testImplementation 'junit:junit:4.12'
     testImplementation "org.mockito:mockito-all:1.10.19"
     testImplementation "org.robolectric:robolectric:3.6.1"
     androidTestImplementation 'androidx.test:runner:1.1.0'
@@ -60,8 +59,6 @@ dependencies {
     androidTestImplementation('com.squareup.okhttp:mockwebserver:2.7.0')
     androidTestImplementation 'androidx.test:rules:1.1.0'
     androidTestImplementation 'com.squareup.spoon:spoon-client:1.2.0'
-    androidTestImplementation 'androidx.test:rules:1.1.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.1.0'
 
     // Required for instrumented tests
     implementation 'com.google.code.gson:gson:2.6.2'
@@ -78,8 +75,6 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:2.1.9"
     implementation 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
     implementation 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.1.0'
-    implementation 'com.afollestad.material-dialogs:core:0.9.5.0'
-
 
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     annotationProcessor 'androidx.lifecycle:lifecycle-compiler:2.0.0'

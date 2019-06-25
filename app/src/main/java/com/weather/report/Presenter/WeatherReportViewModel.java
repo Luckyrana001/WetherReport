@@ -34,7 +34,6 @@ import static com.weather.report.helper.Constants.RETRY_AGAIN;
 import static com.weather.report.helper.Constants.START_REQUEST;
 import static com.weather.report.helper.Constants.TABLE_DATA_UPDATED;
 import static com.weather.report.helper.Constants.TABLE_INSERT_ERROR;
-import static com.weather.report.helper.Constants.WEATHER_DATA_UPDATED;
 
 
 public class WeatherReportViewModel extends ViewModel {
@@ -88,9 +87,7 @@ public class WeatherReportViewModel extends ViewModel {
                         mobileDataConsumptionYearlyModel.setCnt(result.getCnt());
                         mobileDataConsumptionYearlyModel.setList(result.getList());
 
-                        mlWarningStatus.postValue(WEATHER_DATA_UPDATED);
                         mlWeatherData.setValue(result.getList());
-
                         insertDataIntoDB(new Gson().toJson(result));
 
                     }, throwable -> {
